@@ -14,6 +14,7 @@ class OpAttributes {
     String? font,
     String? size,
     String? width,
+    String? height,
     String? link,
     bool? bold,
     bool? italic,
@@ -39,6 +40,7 @@ class OpAttributes {
     this.font = font;
     this.size = size;
     this.width = width;
+    this.height = height;
     this.link = link;
     this.bold = bold;
     this.italic = italic;
@@ -79,6 +81,10 @@ class OpAttributes {
   String? get width => _getSizeAsString('width');
   set width(String? v) =>
       v == null ? attrs.remove('width') : attrs['width'] = v;
+
+  String? get height => _getSizeAsString('height');
+  set height(String? v) =>
+      v == null ? attrs.remove('height') : attrs['height'] = v;
 
   String? _getSizeAsString(String attrName) {
     final size = attrs[attrName];
@@ -244,6 +250,7 @@ class OpAttributeSanitizer {
     final mentions = dirtyAttrs.mentions;
     final mention = dirtyAttrs.mention;
     final width = dirtyAttrs.width;
+    final height = dirtyAttrs.height;
     final target = dirtyAttrs.target;
     final rel = dirtyAttrs.rel;
     final codeBlock = dirtyAttrs['code-block'];
@@ -263,6 +270,7 @@ class OpAttributeSanitizer {
       'mentions',
       'mention',
       'width',
+      'height',
       'target',
       'rel',
       'code-block',
@@ -307,6 +315,11 @@ class OpAttributeSanitizer {
     if (isTruthy(width) &&
         OpAttributeSanitizer.isValidWidth(width.toString())) {
       cleanAttrs.width = width;
+    }
+
+    if (isTruthy(height) &&
+        OpAttributeSanitizer.isValidWidth(height.toString())) {
+      cleanAttrs.height = height;
     }
 
     if (isTruthy(link)) {

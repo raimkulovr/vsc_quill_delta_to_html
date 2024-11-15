@@ -284,6 +284,9 @@ class OpToHtmlConverter {
       if (isTruthy(op.attributes.width)) {
         tagAttrs.add(makeAttr('width', op.attributes.width!));
       }
+      if (isTruthy(op.attributes.height)) {
+        tagAttrs.add(makeAttr('height', op.attributes.height!));
+      }
       tagAttrs.add(makeAttr('src', op.insert.value));
       return tagAttrs;
     }
